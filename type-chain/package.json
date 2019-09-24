@@ -1,0 +1,17 @@
+{
+  "name": "type-chain",
+  "version": "1.0.0",
+  "description": "basic blockchain using typescript",
+  "main": "index.js",
+  "author": "nk",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsc-watch --onSuccess \" node dist/index.js\""
+  },
+  "devDependencies": {
+    "tsc-watch": "^4.0.0"
+  },
+  "dependencies": {
+    "typescript": "^3.6.3"
+  }
+}
