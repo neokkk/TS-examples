@@ -1,7 +1,40 @@
-const sayHi = (name: string, age: number, gender: string): string => {
-    return `Hello ${name}, you are ${age}, you are a ${gender}.`;
+import * as CryptoJS from 'crypto-js';
+
+class Block {
+    public index: number;
+    public hash: string;
+    public prevHash: string;
+    public data: string;
+    public timestamp: number;
+
+    static calculateBlockHash = (
+        index: number, 
+        prevHash: string, 
+        timestamp: number, 
+        data: string
+    ): string => CryptoJS.SHA256(index + prevHash + timestamp + data).toString();
+
+    constructor(
+        index: number, 
+        hash: string,
+        prevHash: string,
+        data: string,
+        timestamp: number
+    ) {
+        this.index = index;
+        this.hash = hash;
+        this.prevHash = prevHash;
+        this.data = data;
+        this.timestamp = timestamp;
+    }
 }
 
-console.log(sayHi('nk', 25, 'female'));
+const genesisBlock: Block = new Block(0, 'a secret hash', '', 'new block!', 201909301222);
+
+let blockchain: Block[] = [genesisBlock];
+
+const getBlockchain = (): Block[] => blockchain;
+const getLatestBlock = (): Block => blockchain[blockchain.length - 1];
+const getNewTimestamp = (): number => Math.round(new Date().getTime() / 1000);
 
 export {};
